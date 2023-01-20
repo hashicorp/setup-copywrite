@@ -70,7 +70,10 @@ async function run () {
     }
 
     const url = assetToDownload.browser_download_url
-    // const auth = 'token ' + (githubToken)
+    // let auth
+    // if (githubToken) {
+    //    auth = 'token ' + (githubToken)
+    // }
 
     core.debug(`Downloading ${repo} release from ${url}`)
     const downloadedArchive = await tc.downloadTool(url)
