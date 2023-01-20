@@ -1,0 +1,20 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+name: 'setup-copywrite'
+description: 'setup-copywrite downloads, installs, and configures the copywrite CLI tool'
+inputs:
+  version:
+    description: 'The version of the copywrite CLI to install. Defaults to the most recent version.'
+    required: false
+    default: 'latest'
+  archive-checksum:
+    description: 'The expected SHA256 checksum to verify the copywrite CLI archive against.'
+    required: false
+    default: ''
+outputs:
+  version:
+    description: 'The version of the copywrite CLI that was installed.'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

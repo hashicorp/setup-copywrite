@@ -1,0 +1,19 @@
+on:
+  push:
+    branches:
+        - main
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    name: test the action by using it
+    steps:
+      - name: Install copywrite
+        id: install
+        uses: hashicorp/setup-copywrite@main
+
+      - name: Print installed copywrite version
+        run: echo "Installed copywrite ${{steps.install.outputs.version}}"
+        
+      - name: Run `copywrite version`
+        run: copywrite version

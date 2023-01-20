@@ -1,0 +1,46 @@
+{
+  "name": "setup-copywrite",
+  "version": "1.0.0",
+  "description": "setup-copywrite downloads, installs, and configures the copywrite signing service client",
+  "license": "MPL-2.0",
+  "publisher": "hashicorp",
+  "main": "index.js",
+  "jest": {
+    "collectCoverage": true,
+    "testTimeout": 15000
+  },
+  "scripts": {
+    "lint": "eslint '**/*.js'",
+    "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
+    "test": "jest",
+    "all": "npm run lint && npm run prepare && npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hashicorp/setup-copywrite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/hashicorp/setup-copywrite/issues"
+  },
+  "homepage": "https://github.com/hashicorp/setup-copywrite#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "@actions/io": "^1.1.1",
+    "@actions/tool-cache": "^1.7.1",
+    "@octokit/plugin-retry": "^3.0.9",
+    "@octokit/plugin-throttling": "^3.5.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.31.1",
+    "eslint": "^8.32.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "jest": "^27.3.1",
+    "nock": "^13.1.4"
+  }
+}
