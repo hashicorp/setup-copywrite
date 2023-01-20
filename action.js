@@ -72,7 +72,7 @@ async function run () {
     const url = assetToDownload.browser_download_url
     let auth
     if (githubToken) {
-       auth = 'token ' + (githubToken)
+      auth = 'token ' + (githubToken)
     }
 
     core.debug(`Downloading ${repo} release from ${url}`)
