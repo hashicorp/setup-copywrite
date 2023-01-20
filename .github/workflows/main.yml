@@ -16,4 +16,4 @@ jobs:
         run: echo "Installed copywrite ${{steps.install.outputs.version}}"
         
       - name: Run `copywrite version`
-        run: copywrite version
+        run: copywrite --version
