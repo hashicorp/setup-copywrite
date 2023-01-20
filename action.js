@@ -73,7 +73,7 @@ async function run () {
     // const auth = 'token ' + (githubToken)
 
     core.debug(`Downloading ${repo} release from ${url}`)
-    const downloadedArchive = await tc.downloadTool(url, undefined, undefined, { accept: 'application/octet-stream' })
+    const downloadedArchive = await tc.downloadTool(url)
 
     if (expectedArchiveChecksum !== '') {
       const downloadedArchiveChecksum = crypto.createHash('sha256').update(await fs.readFile(downloadedArchive)).digest('hex')
