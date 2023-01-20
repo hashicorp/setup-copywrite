@@ -69,7 +69,7 @@ async function run () {
       throw new Error(`Unable to find asset matching ${expectedAssetName} in the ${tag} release`)
     }
 
-    const url = assetToDownload.url
+    const url = assetToDownload.browser_download_url
     // const auth = 'token ' + (githubToken)
 
     core.debug(`Downloading ${repo} release from ${url}`)
