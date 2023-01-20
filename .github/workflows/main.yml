@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-        - main
+        - no-auth-needed
 
 jobs:
   main:
@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Install copywrite
         id: install
-        uses: hashicorp/setup-copywrite@main
+        uses: hashicorp/setup-copywrite@no-auth-needed
 
       - name: Print installed copywrite version
         run: echo "Installed copywrite ${{steps.install.outputs.version}}"
