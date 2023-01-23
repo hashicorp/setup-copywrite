@@ -1,8 +1,6 @@
 name: "Unit and E2E Testing"
 
-on:
-  pull_request:
-  push:
+on: [push, pull_request]
 
 jobs:
   unit:
