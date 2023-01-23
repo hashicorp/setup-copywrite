@@ -76,11 +76,15 @@ async function run () {
       throw new Error(`Unable to find asset matching ${expectedAssetName} in the ${tag} release`)
     }
 
-    const url = assetToDownload.url
-    const auth = 'token ' + (githubToken)
+    let url = assetToDownload.browser_download_url
+    let auth
+    if (githubToken) {
+      auth = 'token ' + (githubToken)
+      url = assetToDownload.url
+    }
 
     core.debug(`Downloading ${repo} release from ${url}`)
-    const downloadedArchive = await tc.downloadTool(url, undefined, auth, { accept: 'application/octet-stream' })
+    const downloadedArchive = await tc.downloadTool(url, undefined, auth)
 
     if (expectedArchiveChecksum !== '') {
       const downloadedArchiveChecksum = crypto.createHash('sha256').update(await fs.readFile(downloadedArchive)).digest('hex')

@@ -15,17 +15,20 @@ const mockRelease = {
     {
       id: 1,
       name: 'copywrite_0.1.3_darwin_x86_64.tar.gz',
-      url: 'https://api.github.com/repos/hashicorp/copywrite/releases/assets/1'
+      url: 'https://api.github.com/repos/hashicorp/copywrite/releases/assets/1',
+      browser_download_url: 'https://github.com/hashicorp/copywrite/releases/download/v0.1.3/copywrite_0.1.3_darwin_x86_64.tar.gz'
     },
     {
       id: 2,
       name: 'copywrite_0.1.3_linux_x86_64.tar.gz',
-      url: 'https://api.github.com/repos/hashicorp/copywrite/releases/assets/2'
+      url: 'https://api.github.com/repos/hashicorp/copywrite/releases/assets/2',
+      browser_download_url: 'https://github.com/hashicorp/copywrite/releases/download/v0.1.3/copywrite_0.1.3_linux_x86_64.tar.gz'
     },
     {
       id: 3,
       name: 'copywrite_0.1.3_windows_x86_64.zip',
-      url: 'https://api.github.com/repos/hashicorp/copywrite/releases/assets/3'
+      url: 'https://api.github.com/repos/hashicorp/copywrite/releases/assets/3',
+      browser_download_url: 'https://github.com/hashicorp/copywrite/releases/download/v0.1.3/copywrite_0.1.3_windows_x86_64.zip'
     }
   ],
   id: '1',
@@ -50,10 +53,11 @@ beforeEach(() => {
 
 describe('action', () => {
   test('installs latest version', (done) => {
-    const scope = nock('https://api.github.com')
+    const scopeAPI = nock('https://api.github.com')
       .get('/repos/hashicorp/copywrite/releases/latest')
       .reply(200, mockRelease)
-      .get('/repos/hashicorp/copywrite/releases/assets/3')
+    const scopeWeb = nock('https://github.com')
+      .get('/hashicorp/copywrite/releases/download/v0.1.3/copywrite_0.1.3_windows_x86_64.zip')
       .replyWithFile(200, path.resolve(__dirname, 'test.zip'), { 'content-type': 'application/octet-stream' })
     const spyCoreAddPath = jest.spyOn(core, 'addPath')
     const spyCoreSetOutput = jest.spyOn(core, 'setOutput')
@@ -68,7 +72,8 @@ describe('action', () => {
 
       const action = require('./action')
       await expect(await action()).resolves
-      expect(scope.isDone()).toBeTruthy()
+      expect(scopeAPI.isDone()).toBeTruthy()
+      expect(scopeWeb.isDone()).toBeTruthy()
       expect(spyCoreAddPath).toHaveBeenCalled()
       expect(spyCoreSetOutput).toHaveBeenCalledWith('version', 'v0.1.3')
       done()
@@ -76,10 +81,11 @@ describe('action', () => {
   })
 
   test('installs configured version', (done) => {
-    const scope = nock('https://api.github.com')
+    const scopeAPI = nock('https://api.github.com')
       .get('/repos/hashicorp/copywrite/releases/tags/v0.1.3')
       .reply(200, mockRelease)
-      .get('/repos/hashicorp/copywrite/releases/assets/3')
+    const scopeWeb = nock('https://github.com')
+      .get('/hashicorp/copywrite/releases/download/v0.1.3/copywrite_0.1.3_windows_x86_64.zip')
       .replyWithFile(200, path.resolve(__dirname, 'test.zip'), { 'content-type': 'application/octet-stream' })
     const spyCoreAddPath = jest.spyOn(core, 'addPath')
     const spyCoreSetOutput = jest.spyOn(core, 'setOutput')
@@ -95,7 +101,8 @@ describe('action', () => {
 
       const action = require('./action')
       await expect(await action()).resolves
-      expect(scope.isDone()).toBeTruthy()
+      expect(scopeAPI.isDone()).toBeTruthy()
+      expect(scopeWeb.isDone()).toBeTruthy()
       expect(spyCoreAddPath).toHaveBeenCalled()
       expect(spyCoreSetOutput).toHaveBeenCalledWith('version', 'v0.1.3')
       done()
