@@ -1,10 +1,20 @@
+name: "Unit and E2E Testing"
+
 on:
+  pull_request:
   push:
-    branches:
-        - '*'
 
 jobs:
-  main:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - run: npm ci
+    
+    - run: npm test
+
+  e2e:
     runs-on: ubuntu-latest
     name: test the action by using it
     steps:
