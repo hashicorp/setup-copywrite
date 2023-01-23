@@ -1,16 +1,21 @@
 on:
   push:
     branches:
-        - no-auth-needed
+        - '*'
 
 jobs:
   main:
     runs-on: ubuntu-latest
     name: test the action by using it
     steps:
+        # https://stackoverflow.com/a/58035262
+      - name: Extract branch name
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
+        id: extract_branch
+    
       - name: Install copywrite
         id: install
-        uses: hashicorp/setup-copywrite@no-auth-needed
+        uses: hashicorp/setup-copywrite@${{ steps.extract_branch.outputs.branch }}
 
       - name: Print installed copywrite version
         run: echo "Installed copywrite ${{steps.install.outputs.version}}"
