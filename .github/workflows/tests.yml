@@ -23,7 +23,7 @@ jobs:
     
       - name: Install copywrite
         id: install
-        uses: hashicorp/setup-copywrite@${{ steps.extract_branch.outputs.branch }}
+        uses: hashicorp/setup-copywrite@${{ step.extract_branch.outputs.branch }}
 
       - name: Print installed copywrite version
         run: echo "Installed copywrite ${{steps.install.outputs.version}}"
