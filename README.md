@@ -8,11 +8,14 @@ Originally based off of [setup-signore](https://github.com/hashicorp/setup-signo
 
 Note: see [action.yml](action.yml) for detailed information about configuration and defaults.
 
-### Install the latest copywrite client release
+### Install the latest copywrite client release and validate headers
 
 ```yaml
 - name: Install copywrite
   uses: hashicorp/setup-copywrite@v1
+  
+- name: Validate Header Compliance
+  run: copywrite headers --plan
 ```
 
 ### Install a specific copywrite client release
