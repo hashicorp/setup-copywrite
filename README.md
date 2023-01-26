@@ -11,8 +11,11 @@ Note: see [action.yml](action.yml) for detailed information about configuration 
 ### Install the latest copywrite client release and validate headers
 
 ```yaml
+- name: Checkout Repo
+  uses: actions/checkout@v3
+
 - name: Install copywrite
-  uses: hashicorp/setup-copywrite@v1
+  uses: hashicorp/setup-copywrite@v1.0.0
   
 - name: Validate Header Compliance
   run: copywrite headers --plan
@@ -22,20 +25,20 @@ Note: see [action.yml](action.yml) for detailed information about configuration 
 
 ```yaml
 - name: Install copywrite v0.1.2
-  uses: hashicorp/setup-copywrite@v1
+  uses: hashicorp/setup-copywrite@v1.0.0
   with:
-    version: v0.1.2
+    version: v0.13.1
 ```
 
 ### Install a specific copywrite client release, verifying its archive checksum
 
 ```yaml
 - name: Install copywrite v0.1.2 and verify checksum
-  uses: hashicorp/setup-copywrite@v1
+  uses: hashicorp/setup-copywrite@v1.0.0
   with:
-    version: v0.1.2
-    # https://github.com/hashicorp/copywrite/releases/download/v0.1.2/copywrite_0.1.2_darwin_x86_64.tar.gz sha256 hash
-    archive-checksum: 6b58be415b3e9b2f77d74f2cf70857819d15df512626658223b2d4a4f3adc404
+    version: v0.13.1
+    # https://github.com/hashicorp/copywrite/releases/download/v0.13.1/copywrite_0.13.1_darwin_x86_64.tar.gz sha256 hash
+    archive-checksum: 359b0d80459012481f19a2bf7afafb5d6e01f2e5f8e4af42a89c0f5289adbaec
 ```
 
 ## FAQ
