@@ -48,7 +48,7 @@ function mapOS (os) {
 async function run () {
   try {
     const expectedArchiveChecksum = core.getInput('archive-checksum')
-    const githubToken = process.env.GITHUB_TOKEN ?? ''
+    const githubToken = core.getInput('token')
     const version = core.getInput('version')
 
     const platform = mapOS(os.platform())

@@ -4,6 +4,10 @@
 name: 'setup-copywrite'
 description: 'setup-copywrite downloads, installs, and configures the copywrite CLI tool'
 inputs:
+  token:
+    description: GitHub token used to download copywrite releases
+    required: false
+    default: ${{ github.token }}
   version:
     description: 'The version of the copywrite CLI to install. Defaults to the most recent version.'
     required: false
