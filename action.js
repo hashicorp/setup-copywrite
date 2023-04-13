@@ -79,7 +79,7 @@ async function run () {
     }
 
     core.debug(`Downloading ${repo} release from ${url}`)
-    const downloadedArchive = await tc.downloadTool(url, undefined, auth)
+    const downloadedArchive = await tc.downloadTool(url, undefined, auth, { accept: 'application/octet-stream' })
 
     if (expectedArchiveChecksum !== '') {
       const downloadedArchiveChecksum = crypto.createHash('sha256').update(await fs.readFile(downloadedArchive)).digest('hex')
