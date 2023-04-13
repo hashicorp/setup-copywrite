@@ -15,11 +15,10 @@ jobs:
   e2e:
     runs-on: ubuntu-latest
     name: test the action by using it
-    if: ${{ github.ref == 'refs/heads/main' }}
     steps:
       - name: Install copywrite
         id: install
-        uses: hashicorp/setup-copywrite@main
+        uses: hashicorp/setup-copywrite@${{ github.head_ref || github.ref_name }}
 
       - name: Print installed copywrite version
         run: echo "Installed copywrite ${{steps.install.outputs.version}}"
