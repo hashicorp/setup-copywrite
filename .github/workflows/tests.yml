@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Install copywrite
         id: install
-        uses: hashicorp/setup-copywrite@${{ github.head_ref || github.ref_name }}
+        uses: hashicorp/setup-copywrite@fix-download
 
       - name: Print installed copywrite version
         run: echo "Installed copywrite ${{steps.install.outputs.version}}"
