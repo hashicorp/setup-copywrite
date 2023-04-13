@@ -69,7 +69,6 @@ async function run () {
       throw new Error(`Unable to find asset matching ${expectedAssetName} in the ${tag} release`)
     }
 
-    core.warning(assetToDownload)
     let url = assetToDownload.browser_download_url
     let auth
     if (githubToken) {
