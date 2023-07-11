@@ -114,7 +114,7 @@ describe('action', () => {
   test('retries transient errors', (done) => {
     const scope = nock('https://api.github.com')
       .get('/repos/hashicorp/copywrite/releases/tags/v0.1.3')
-      .reply(500, 'expected transient error')
+      .replyWithError(500, 'expected transient error')
       .get('/repos/hashicorp/copywrite/releases/tags/v0.1.3')
       .reply(200, mockRelease)
       .get('/repos/hashicorp/copywrite/releases/assets/3')
@@ -135,11 +135,11 @@ describe('action', () => {
       done()
     })
   })
-  // TODO: fix failing tests
-  test.skip('retries abuse limit errors', (done) => {
+
+  test('retries abuse limit errors', (done) => {
     const scope = nock('https://api.github.com')
       .get('/repos/hashicorp/copywrite/releases/tags/v0.1.3')
-      .reply(403, {
+      .replyWithError(403, {
         message: 'You have triggered an abuse detection mechanism and have been temporarily blocked from content creation. Please retry your request again later.',
         documentation_url: 'https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits'
       })
@@ -164,10 +164,10 @@ describe('action', () => {
     })
   })
 
-  test.skip('retries rate limit errors', (done) => {
+  test('retries rate limit errors', (done) => {
     const scope = nock('https://api.github.com')
       .get('/repos/hashicorp/copywrite/releases/tags/v0.1.3')
-      .reply(429, 'expected rate limit error')
+      .replyWithError(429, 'expected rate limit error')
       .get('/repos/hashicorp/copywrite/releases/tags/v0.1.3')
       .reply(200, mockRelease)
       .get('/repos/hashicorp/copywrite/releases/assets/3')
