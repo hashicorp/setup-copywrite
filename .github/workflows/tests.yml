@@ -1,6 +1,7 @@
-name: "Unit and E2E Testing"
+name: "GitHub Action: Unit Test"
 
-on: [push, pull_request]
+on:
+  push:
 
 jobs:
   unit:
@@ -15,18 +16,3 @@ jobs:
      
       - name: Run test suite
         run: npm test
-
-  e2e:
-    runs-on: ubuntu-latest
-    name: Test the Action by executing it
-    if: ${{ github.ref == 'refs/heads/main' }}
-    steps:
-      - name: Install copywrite
-        id: install
-        uses: hashicorp/setup-copywrite@main
-
-      - name: Print installed copywrite version
-        run: echo "Installed copywrite ${{steps.install.outputs.version}}"
-        
-      - name: Run `copywrite version`
-        run: copywrite --version
