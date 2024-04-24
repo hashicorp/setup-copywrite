@@ -7,8 +7,8 @@ env:
   PRODUCT_VERSION: "0.18.0"
 
 jobs:
-  setup-packer:
-    name: Test `setup-packer`
+  setup-copywrite:
+    name: Test `setup-copywrite`
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -45,4 +45,4 @@ jobs:
         id: latest_version
 
       - name: Print `copywrite` version
-        run: copywrite version
+        run: copywrite --version
