@@ -22,3 +22,6 @@ outputs:
 runs:
   using: 'node20'
   main: 'dist/index.js'
+branding:
+  icon: "file-text"
+  color: "gray-dark"
