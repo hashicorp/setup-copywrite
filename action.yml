@@ -20,5 +20,8 @@ outputs:
   version:
     description: 'The version of the copywrite CLI that was installed.'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
+branding:
+  icon: "file-text"
+  color: "gray-dark"
