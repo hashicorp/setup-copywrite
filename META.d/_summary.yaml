@@ -1,0 +1,14 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+---
+schema: 1.1
+
+partition: internal-platform
+category: github-action
+
+summary:
+  owner: team-productivity-systems-and-services
+  description: |
+    GitHub Action for downloading and installing the copywrite CLI.
+    
