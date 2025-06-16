@@ -8,7 +8,7 @@ partition: internal-platform
 category: github-action
 
 summary:
-  owner: team-productivity-systems-and-services
+  owner: team-ip-compliance
   description: |
     GitHub Action for downloading and installing the copywrite CLI.
     
