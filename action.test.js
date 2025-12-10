@@ -3,12 +3,18 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-const fs = require('fs')
-const nock = require('nock')
-const path = require('path')
-const os = require('os')
+import fs from 'fs'
+import nock from 'nock'
+import path from 'path'
+import os from 'os'
+import { vi, describe, test, beforeAll, beforeEach, expect } from 'vitest'
+import core from '@actions/core'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+import action from './action.js'
 
-const core = require('@actions/core')
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const mockRelease = {
   assets: [
@@ -45,9 +51,9 @@ beforeEach(() => {
   process.env.INPUT_VERSION = 'latest'
   process.env['INPUT_VERSION-CHECKSUM'] = '5663389ef1a8ec48af6ca622e66bf0f54ba8f22c127f14cb8a3f429e40868582'
 
-  const spyOsArch = jest.spyOn(os, 'arch')
+  const spyOsArch = vi.spyOn(os, 'arch')
   spyOsArch.mockReturnValue('x64')
-  const spyOsPlatform = jest.spyOn(os, 'platform')
+  const spyOsPlatform = vi.spyOn(os, 'platform')
   spyOsPlatform.mockReturnValue('win32')
 })
 
@@ -61,18 +67,17 @@ describe('action', () => {
     // const scopeWeb = nock('https://github.com')
     //   .get('/hashicorp/copywrite/releases/download/v0.1.3/copywrite_0.1.3_windows_x86_64.zip')
     //   .replyWithFile(200, path.resolve(__dirname, 'test.zip'), { 'content-type': 'application/octet-stream' })
-    const spyCoreAddPath = jest.spyOn(core, 'addPath')
-    const spyCoreSetOutput = jest.spyOn(core, 'setOutput')
+    const spyCoreAddPath = vi.spyOn(core, 'addPath')
+    const spyCoreSetOutput = vi.spyOn(core, 'setOutput')
 
     fs.mkdtemp(path.join(os.tmpdir(), 'setup-copywrite-'), async (err, directory) => {
       if (err) throw err
 
       process.env.RUNNER_TEMP = directory
 
-      const spyOsHomedir = jest.spyOn(os, 'homedir')
+      const spyOsHomedir = vi.spyOn(os, 'homedir')
       spyOsHomedir.mockReturnValue(directory)
 
-      const action = require('./action')
       await expect(await action()).resolves
       expect(scopeAPI.isDone()).toBeTruthy()
       expect(spyCoreAddPath).toHaveBeenCalled()
@@ -90,8 +95,8 @@ describe('action', () => {
     // const scopeWeb = nock('https://github.com')
     //   .get('/hashicorp/copywrite/releases/download/v0.1.3/copywrite_0.1.3_windows_x86_64.zip')
     //   .replyWithFile(200, path.resolve(__dirname, 'test.zip'), { 'content-type': 'application/octet-stream' })
-    const spyCoreAddPath = jest.spyOn(core, 'addPath')
-    const spyCoreSetOutput = jest.spyOn(core, 'setOutput')
+    const spyCoreAddPath = vi.spyOn(core, 'addPath')
+    const spyCoreSetOutput = vi.spyOn(core, 'setOutput')
 
     fs.mkdtemp(path.join(os.tmpdir(), 'setup-copywrite-'), async (err, directory) => {
       if (err) throw err
@@ -99,10 +104,9 @@ describe('action', () => {
       process.env.INPUT_VERSION = 'v0.1.3'
       process.env.RUNNER_TEMP = directory
 
-      const spyOsHomedir = jest.spyOn(os, 'homedir')
+      const spyOsHomedir = vi.spyOn(os, 'homedir')
       spyOsHomedir.mockReturnValue(directory)
 
-      const action = require('./action')
       await expect(await action()).resolves
       expect(scopeAPI.isDone()).toBeTruthy()
       expect(spyCoreAddPath).toHaveBeenCalled()
@@ -126,10 +130,9 @@ describe('action', () => {
       process.env.INPUT_VERSION = 'v0.1.3'
       process.env.RUNNER_TEMP = directory
 
-      const spyOsHomedir = jest.spyOn(os, 'homedir')
+      const spyOsHomedir = vi.spyOn(os, 'homedir')
       spyOsHomedir.mockReturnValue(directory)
 
-      const action = require('./action')
       await expect(await action()).resolves
       expect(scope.isDone()).toBeTruthy()
       done()
@@ -154,10 +157,9 @@ describe('action', () => {
       process.env.INPUT_VERSION = 'v0.1.3'
       process.env.RUNNER_TEMP = directory
 
-      const spyOsHomedir = jest.spyOn(os, 'homedir')
+      const spyOsHomedir = vi.spyOn(os, 'homedir')
       spyOsHomedir.mockReturnValue(directory)
 
-      const action = require('./action')
       await expect(await action()).resolves
       expect(scope.isDone()).toBeTruthy()
       done()
@@ -179,10 +181,9 @@ describe('action', () => {
       process.env.INPUT_VERSION = 'v0.1.3'
       process.env.RUNNER_TEMP = directory
 
-      const spyOsHomedir = jest.spyOn(os, 'homedir')
+      const spyOsHomedir = vi.spyOn(os, 'homedir')
       spyOsHomedir.mockReturnValue(directory)
 
-      const action = require('./action')
       await expect(await action()).resolves
       expect(scope.isDone()).toBeTruthy()
       done()

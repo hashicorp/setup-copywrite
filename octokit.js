@@ -3,11 +3,11 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-const core = require('@actions/core')
-const { GitHub, getOctokitOptions } = require('@actions/github/lib/utils')
-const { Octokit } = require('@octokit/rest')
-const { retry } = require('@octokit/plugin-retry')
-const { throttling } = require('@octokit/plugin-throttling')
+import core from '@actions/core'
+import { GitHub, getOctokitOptions } from '@actions/github/lib/utils'
+import { Octokit } from '@octokit/rest'
+import { retry } from '@octokit/plugin-retry'
+import { throttling } from '@octokit/plugin-throttling'
 
 const abuseLimitRetries = 5
 const rateLimitRetries = 5
@@ -43,7 +43,7 @@ const baseOptions = {
   }
 }
 
-module.exports = function client (token) {
+export default function client (token) {
   if (!token) {
     return new Octokit(baseOptions)
   }

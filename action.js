@@ -3,16 +3,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-'use strict'
-
-const fs = require('fs').promises
-const os = require('os')
-const crypto = require('crypto')
-
-const core = require('@actions/core')
-const tc = require('@actions/tool-cache')
-
-const octokit = require('./octokit')
+import { promises as fs } from 'fs'
+import os from 'os'
+import crypto from 'crypto'
+import core from '@actions/core'
+import tc from '@actions/tool-cache'
+import octokit from './octokit.js'
 
 const owner = 'hashicorp'
 const repo = 'copywrite'
@@ -108,4 +104,4 @@ async function run () {
   }
 }
 
-module.exports = run
+export default run

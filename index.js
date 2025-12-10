@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-const action = require('./action')
+import action from './action.js'
 
 async function run () {
   try {
