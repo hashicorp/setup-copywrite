@@ -20,17 +20,17 @@ const baseOptions = {
     error: core.error
   },
   throttle: {
-    onAbuseLimit (retryAfter, options) {
-      core.info(`Abuse limit triggered for request ${options.method} ${options.url} (attempt ${options.request.retryCount}/${abuseLimitRetries})`)
+    onSecondaryRateLimit (retryAfter, options, octokit) {
+      core.info(`Secondary rate limit triggered for request ${options.method} ${options.url} (attempt ${options.request.retryCount}/${abuseLimitRetries})`)
 
       if (options.request.retryCount < abuseLimitRetries) {
         core.info(`Retrying after ${retryAfter} seconds`)
         return true
       }
 
-      core.warning(`Exhausted abuse limit retry count (${abuseLimitRetries}) for ${options.method} ${options.url}`)
+      core.warning(`Exhausted secondary rate limit retry count (${abuseLimitRetries}) for ${options.method} ${options.url}`)
     },
-    onRateLimit (retryAfter, options) {
+    onRateLimit (retryAfter, options, octokit) {
       core.info(`Rate limit triggered for request ${options.method} ${options.url} (attempt ${options.request.retryCount}/${rateLimitRetries})`)
 
       if (options.request.retryCount < rateLimitRetries) {
