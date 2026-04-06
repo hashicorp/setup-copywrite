@@ -6,8 +6,8 @@
 import { promises as fs } from 'fs'
 import os from 'os'
 import crypto from 'crypto'
-import core from '@actions/core'
-import tc from '@actions/tool-cache'
+import * as core from '@actions/core'
+import * as tc from '@actions/tool-cache'
 import octokit from './octokit.js'
 
 const owner = 'hashicorp'

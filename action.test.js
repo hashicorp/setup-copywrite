@@ -8,8 +8,17 @@ import nock from 'nock'
 import path from 'path'
 import os from 'os'
 import { vi, describe, test, beforeAll, beforeEach, expect } from 'vitest'
-import core from '@actions/core'
+import * as core from '@actions/core'
 import { fileURLToPath } from 'url'
+
+vi.mock('@actions/core', async (importActual) => {
+  const actual = await importActual()
+  return {
+    ...actual,
+    addPath: vi.fn(),
+    setOutput: vi.fn()
+  }
+})
 import { dirname } from 'path'
 import action from './action.js'
 
@@ -47,6 +56,7 @@ beforeAll(() => {
 })
 
 beforeEach(() => {
+  vi.clearAllMocks()
   process.env.INPUT_TOKEN = 'testtoken'
   process.env.INPUT_VERSION = 'latest'
   process.env['INPUT_VERSION-CHECKSUM'] = '5663389ef1a8ec48af6ca622e66bf0f54ba8f22c127f14cb8a3f429e40868582'
@@ -67,9 +77,6 @@ describe('action', () => {
     // const scopeWeb = nock('https://github.com')
     //   .get('/hashicorp/copywrite/releases/download/v0.1.3/copywrite_0.1.3_windows_x86_64.zip')
     //   .replyWithFile(200, path.resolve(__dirname, 'test.zip'), { 'content-type': 'application/octet-stream' })
-    const spyCoreAddPath = vi.spyOn(core, 'addPath')
-    const spyCoreSetOutput = vi.spyOn(core, 'setOutput')
-
     fs.mkdtemp(path.join(os.tmpdir(), 'setup-copywrite-'), async (err, directory) => {
       if (err) throw err
 
@@ -80,8 +87,8 @@ describe('action', () => {
 
       await expect(await action()).resolves
       expect(scopeAPI.isDone()).toBeTruthy()
-      expect(spyCoreAddPath).toHaveBeenCalled()
-      expect(spyCoreSetOutput).toHaveBeenCalledWith('version', 'v0.1.3')
+      expect(core.addPath).toHaveBeenCalled()
+      expect(core.setOutput).toHaveBeenCalledWith('version', 'v0.1.3')
       done()
     })
   })
@@ -95,9 +102,6 @@ describe('action', () => {
     // const scopeWeb = nock('https://github.com')
     //   .get('/hashicorp/copywrite/releases/download/v0.1.3/copywrite_0.1.3_windows_x86_64.zip')
     //   .replyWithFile(200, path.resolve(__dirname, 'test.zip'), { 'content-type': 'application/octet-stream' })
-    const spyCoreAddPath = vi.spyOn(core, 'addPath')
-    const spyCoreSetOutput = vi.spyOn(core, 'setOutput')
-
     fs.mkdtemp(path.join(os.tmpdir(), 'setup-copywrite-'), async (err, directory) => {
       if (err) throw err
 
@@ -109,8 +113,8 @@ describe('action', () => {
 
       await expect(await action()).resolves
       expect(scopeAPI.isDone()).toBeTruthy()
-      expect(spyCoreAddPath).toHaveBeenCalled()
-      expect(spyCoreSetOutput).toHaveBeenCalledWith('version', 'v0.1.3')
+      expect(core.addPath).toHaveBeenCalled()
+      expect(core.setOutput).toHaveBeenCalledWith('version', 'v0.1.3')
       done()
     })
   })

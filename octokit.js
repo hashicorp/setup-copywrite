@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-import core from '@actions/core'
+import * as core from '@actions/core'
 import { GitHub, getOctokitOptions } from '@actions/github/lib/utils'
 import { Octokit } from '@octokit/rest'
 import { retry } from '@octokit/plugin-retry'
