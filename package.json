@@ -46,5 +46,8 @@
     "eslint-plugin-promise": "^6.1.1",
     "nock": "^13.5.1",
     "vitest": "^2.1.8"
+  },
+  "overrides": {
+    "undici": "6.24.1"
   }
 }
