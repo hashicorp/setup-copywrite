@@ -7,3 +7,10 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    allow:
+      - dependency-type: "direct"
+      - dependency-type: "indirect"
+    groups:
+      all-npm:
+        patterns:
+          - "*"
