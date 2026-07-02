@@ -28,10 +28,10 @@
   },
   "homepage": "https://github.com/hashicorp/setup-copywrite#readme",
   "dependencies": {
-    "@actions/core": "^3.0.1",
+    "@actions/core": "^1.11.1",
     "@actions/github": "^9.1.1",
     "@actions/io": "^3.0.2",
-    "@actions/tool-cache": "^4.0.0",
+    "@actions/tool-cache": "^2.0.2",
     "@octokit/plugin-retry": "^8.1.0",
     "@octokit/plugin-throttling": "^11.0.3",
     "@octokit/rest": "^22.0.0"
@@ -39,11 +39,11 @@
   "devDependencies": {
     "@vitest/coverage-v8": "^4.1.0",
     "esbuild": "^0.28.1",
-    "eslint": "^10.6.0",
+    "eslint": "^8.57.1",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^7.3.0",
+    "eslint-plugin-promise": "^6.6.0",
     "nock": "^14.0.16",
     "vitest": "^4.1.0"
   },
