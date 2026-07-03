@@ -11,6 +11,20 @@ updates:
       - dependency-type: "direct"
       - dependency-type: "indirect"
     groups:
-      all-npm:
+      actions:
         patterns:
-          - "*"
+          - "@actions/*"
+      octokit:
+        patterns:
+          - "@octokit/*"
+      linting:
+        patterns:
+          - "eslint"
+          - "eslint-*"
+          - "@eslint/*"
+      build-and-test:
+        patterns:
+          - "esbuild"
+          - "vitest"
+          - "@vitest/*"
+          - "nock"
