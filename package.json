@@ -37,14 +37,14 @@
     "@octokit/rest": "^22.0.0"
   },
   "devDependencies": {
-    "@vitest/coverage-v8": "^4.1.0",
-    "esbuild": "^0.24.0",
+    "@vitest/coverage-v8": "^4.1.10",
+    "esbuild": "^0.28.1",
     "eslint": "^8.56.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
-    "nock": "^13.5.1",
+    "nock": "^14.0.16",
     "vitest": "^4.1.0"
   },
   "overrides": {
