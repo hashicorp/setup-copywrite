@@ -47,6 +47,9 @@
     "nock": "^13.5.1",
     "vitest": "^4.1.0"
   },
+  "optionalDependencies": {
+    "@rolldown/binding-linux-x64-gnu": "1.0.3"
+  },
   "overrides": {
     "undici": "^6.28.0"
   }
