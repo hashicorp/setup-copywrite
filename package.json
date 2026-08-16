@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^4.1.0",
-    "esbuild": "^0.24.0",
+    "esbuild": "^0.28.0",
     "eslint": "^8.56.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.27.5",
