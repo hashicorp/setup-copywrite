@@ -5,12 +5,11 @@
 
 import fs from 'fs'
 import nock from 'nock'
-import path from 'path'
+import path, { dirname } from 'path'
 import os from 'os'
 import { vi, describe, test, beforeAll, beforeEach, expect } from 'vitest'
 import core from '@actions/core'
 import { fileURLToPath } from 'url'
-import { dirname } from 'path'
 import action from './action.js'
 
 const __filename = fileURLToPath(import.meta.url)
